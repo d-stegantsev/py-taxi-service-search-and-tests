@@ -5,7 +5,10 @@ from django.urls import reverse
 
 class ModelTests(TestCase):
     def setUp(self):
-        self.manufacturer = Manufacturer.objects.create(name="Toyota", country="Japan")
+        self.manufacturer = Manufacturer.objects.create(
+            name="Toyota",
+            country="Japan"
+        )
         self.driver = Driver.objects.create_user(
             username="driver1",
             password="pass",
@@ -13,7 +16,10 @@ class ModelTests(TestCase):
             last_name="Driver",
             license_number="ABC123",
         )
-        self.car = Car.objects.create(model="Corolla", manufacturer=self.manufacturer)
+        self.car = Car.objects.create(
+            model="Corolla",
+            manufacturer=self.manufacturer
+        )
         self.car.drivers.add(self.driver)
 
     def test_driver_str(self):
