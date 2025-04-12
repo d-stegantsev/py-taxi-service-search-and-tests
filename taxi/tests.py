@@ -23,7 +23,10 @@ class AdminTests(TestCase):
 
 class ModelTests(TestCase):
     def setUp(self):
-        self.manufacturer = Manufacturer.objects.create(name="Toyota", country="Japan")
+        self.manufacturer = Manufacturer.objects.create(
+            name="Toyota",
+            country="Japan"
+        )
         self.driver = Driver.objects.create_user(
             username="driver1",
             password="pass",
@@ -31,7 +34,10 @@ class ModelTests(TestCase):
             last_name="Driver",
             license_number="ABC123",
         )
-        self.car = Car.objects.create(model="Corolla", manufacturer=self.manufacturer)
+        self.car = Car.objects.create(
+            model="Corolla",
+            manufacturer=self.manufacturer
+        )
         self.car.drivers.add(self.driver)
 
     def test_driver_str(self):
@@ -45,7 +51,10 @@ class ModelTests(TestCase):
 
     def test_get_absolute_url(self):
         url = self.driver.get_absolute_url()
-        self.assertEqual(url, reverse("taxi:driver-detail", kwargs={"pk": self.driver.pk}))
+        self.assertEqual(
+            url,
+            reverse("taxi:driver-detail", kwargs={"pk": self.driver.pk})
+        )
 
 
 class SearchFormsTest(TestCase):
@@ -103,4 +112,3 @@ class ViewTests(TestCase):
         response = self.client.get(reverse("taxi:manufacturer-list"))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Ford")
-
