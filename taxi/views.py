@@ -57,6 +57,7 @@ class ManufacturerListView(LoginRequiredMixin, generic.ListView):
             if name:
                 queryset = queryset.filter(name__icontains=name)
         return queryset
+        
 
 class ManufacturerCreateView(LoginRequiredMixin, generic.CreateView):
     model = Manufacturer
@@ -164,7 +165,7 @@ def toggle_assign_to_car(request, pk):
     driver = Driver.objects.get(id=request.user.id)
     if (
         Car.objects.get(id=pk) in driver.cars.all()
-    ):  # probably could check if car exists
+    ):
         driver.cars.remove(pk)
     else:
         driver.cars.add(pk)
