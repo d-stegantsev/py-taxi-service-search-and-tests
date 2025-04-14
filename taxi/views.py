@@ -57,7 +57,7 @@ class ManufacturerListView(LoginRequiredMixin, generic.ListView):
             if name:
                 queryset = queryset.filter(name__icontains=name)
         return queryset
-        
+
 
 class ManufacturerCreateView(LoginRequiredMixin, generic.CreateView):
     model = Manufacturer
